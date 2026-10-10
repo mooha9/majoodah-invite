@@ -104,7 +104,7 @@
     </div>
     <div class="lock" id="lock" hidden>
       <b>المعاينة مجانية.</b> التحميل قبل التفعيل يحمل علامة «معاينة». أدخل كود التفعيل الذي وصلك بعد الشراء من متجر مجودة لتحميل البطاقة نظيفة، ويبقى التفعيل على هذا المتصفح لكل المناسبات.
-      <form id="actForm"><input id="actCode" placeholder="INV-XXXX-XXXX" autocomplete="off" spellcheck="false" aria-label="كود التفعيل"><button class="btn primary" type="submit">تفعيل</button></form>
+      <form id="actForm"><input id="actCode" placeholder="الصق الكود كما وصلك (INV-XXXX-XXXX)" autocomplete="off" spellcheck="false" aria-label="كود التفعيل"><button class="btn primary" type="submit">تفعيل</button></form>
       <div class="msg" id="actMsg" role="status"></div>
       <div style="margin-top:6px;font-size:13px">ليس لديك كود؟ <a href="https://majoodah.com/" target="_blank" rel="noopener" style="text-decoration:underline">احصل عليه من متجر مجودة</a>.</div>
     </div>
@@ -634,7 +634,7 @@ function buildThemes(){tWrap.innerHTML='';activeThemes().forEach((th,i)=>{const 
 buildThemes(); buildFields();
 
 /* التفعيل */
-function norm(c){return String(c||"").toUpperCase().replace(/[^A-Z0-9]/g,"")}
+function norm(c){const s=String(c||"").toUpperCase();const m=s.match(/INV[\s\-_]*([A-Z0-9]{4})[\s\-_]*([A-Z0-9]{4})/);return m?("INV"+m[1]+m[2]):s.replace(/[^A-Z0-9]/g,"")}
 async function sha(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
 function setActive(v){ACTIVE=v;const c=document.getElementById('actChip');c.textContent=v?"✓ مُفعّلة":"تفعيل البطاقة";c.classList.toggle('on',v);if(v)document.getElementById('lock').hidden=true}
 try{const h=localStorage.getItem(ACT_KEY);if(h&&HASHES.indexOf(h)>=0)setActive(true)}catch(e){}
