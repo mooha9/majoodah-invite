@@ -505,7 +505,7 @@ function items(t,maxw,fr){
     T("closing","600 26px "+F,t.accent,38,0);
   } else if(inv){
     if(!fr.titleDrawn&&V("title")&&(fr.kicker||calli||!CFG.baby)){
-      if(calli) it.push({k:"text",s:V("title"),f:"400 "+tpx+"px "+NAMEF.katibeh,c:t.accent,lh:Math.round(tpx*.92),g:-6});
+      if(calli) it.push({k:"text",s:V("title"),f:"400 "+tpx+"px "+NAMEF.katibeh,c:t.accent,lh:Math.round(tpx*.92),g:CFG.baby?10:-6});
       else { if(!CFG.baby&&fr.kicker) it.push({k:"icon",h:86}); it.push({k:"text",s:V("title"),f:"700 "+(CFG.baby?34:46)+"px "+F,c:t.accent,lh:CFG.baby?44:58,g:12}); } }
     T("verse","700 "+(calli?(CFG.baby?44:36):30)+"px "+NAMEF.amiri,calli?t.accent:t.soft,calli?(CFG.baby?62:54):46,20);
     T("eyebrow","500 29px "+F,t.soft,42,CFG.baby?20:14);
