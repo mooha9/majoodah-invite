@@ -560,6 +560,7 @@ function draw(){
   let total=its.reduce((a,o)=>a+o.h,0), avail=fr.bottom-fr.top, cx=W/2;
   const extra=its.length>1?Math.max(0,Math.min(H>1500?80:36,(avail-total)/its.length*(H>1500?.75:.5))):0;
   let y=fr.top+Math.max(0,(avail-total-extra*(its.length-1))/2);
+  const sc=Math.min(1,avail/Math.max(1,total)); ctx.save(); if(sc<1){ctx.translate(cx,fr.top);ctx.scale(sc,sc);ctx.translate(-cx,-fr.top)}
   window._pills=[]; ctx.textAlign="center";ctx.direction="rtl";ctx.textBaseline="alphabetic";
   for(const o of its){
     if(o.k==="icon"){ctx.fillStyle=t.accent;ctx.font="72px "+F;ctx.fillText(CFG.icon,cx,y+64)}
@@ -576,6 +577,7 @@ function draw(){
     else if(o.k==="qr"){drawQR(o.u,cx-74,y+14,148,t.ink);ctx.font="500 21px "+F;ctx.fillStyle=t.soft;ctx.fillText("امسح للموقع",cx,y+o.h-4);window._pills.push({url:o.u,x0:cx-84,y0:y+4,x1:cx+84,y1:y+o.h})}
     y+=o.h+extra;
   }
+  ctx.restore(); if(sc<1) window._pills=window._pills.map(p=>({url:p.url,x0:cx+(p.x0-cx)*sc,x1:cx+(p.x1-cx)*sc,y0:fr.top+(p.y0-fr.top)*sc,y1:fr.top+(p.y1-fr.top)*sc}));
 }
 
 function exportCanvas(){ // نسخة التصدير: بعلامة «معاينة» قبل التفعيل
